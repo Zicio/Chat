@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HelpDesk</title>
+</head>
+<body>
+  <main class="desk">
+    <button type="button" class="desk__add-button">Добавить тикет</button>
+    <div class="tickets">
+<!-- TODO -->
+    </div>
+    <div class="popup">
+      <h3 class="popup__title"></h3>
+      <form class="popup__form">
+        <label class="label-input">Краткое описание</label>
+        <input class="short-description" type="text" name="name">
+        <label class="label-input">Подробное описание</label>
+        <textarea class="detailed-description" name="description"></textarea>
+      </form>
+      <p class="popup__text">Вы уверены, что хотите удалить тикет? Это действие необратимо.</p>
+      <div class="button-panel">
+        <button type="submit" class="cancel-button">Отмена</button>
+        <button type="submit" class="ok-button">Ok</button>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
