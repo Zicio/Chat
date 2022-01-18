@@ -6,13 +6,7 @@ export default class Logic {
     this.element = element;
     this.request = new Request();
 
-    this.start();
     this.listener();
-  }
-
-  async start() {
-    const tickets = await this.request.getTickets();
-    DOM.showTickets(tickets);
   }
 
   listener() {
@@ -20,109 +14,26 @@ export default class Logic {
   }
 
   eventHandler(e) {
-    // Кнопка "Добавить тикет"
-    if (e.target.classList.contains('desk__add-button')) {
-      DOM.showPopup('Добавить тикет');
-      return;
-    }
-    // Кнопка "Отмена"
-    if (e.target.classList.contains('cancel-button')) {
-      DOM.showPopup();
-      return;
-    }
-    // Кнопка "Изменить тикет"
-    if (e.target.classList.contains('ticket__change')) {
-      this.change(e);
-      return;
-    }
-    // Кнопка "Удалить тикет"
-    if (e.target.classList.contains('ticket__delete')) {
-      DOM.showPopup('Удалить тикет', null, e);
-      return;
-    }
-    // Раскрыть/скрыть описание
-    if (e.target.classList.contains('ticket')) {
-      this.expand(e);
-      return;
-    }
-    // Кнопка "ОК" при добавлении тикета
-    if (e.target.classList.contains('ok-button') && e.target.closest('.popup').querySelector('.popup__title').textContent === 'Добавить тикет') {
-      e.preventDefault();
-      this.sendTicket(e);
-      return;
-    }
-    // Кнопка "ОК" при удалении тикета
-    if (e.target.classList.contains('ok-button') && e.target.closest('.popup').querySelector('.popup__title').textContent === 'Удалить тикет') {
-      e.preventDefault();
-      this.deleteTicket(e);
-      return;
-    }
-    // Кнопка "ОК" при удалении тикета
-    if (e.target.classList.contains('ok-button') && e.target.closest('.popup').querySelector('.popup__title').textContent === 'Изменить тикет') {
-      e.preventDefault();
-      this.changeTicket(e);
-      return;
-    }
-    // Кнопка изменения состояния тикета
-    if (e.target.classList.contains('ticket__check')) {
-      this.checkTicket(e);
+    // Кнопка "Продолжить"
+    if (e.target.classList.contains('form__submit')) {
+      this.checkName(e);
     }
   }
 
-  async change(e) {
-    const response = await this.requestTicket(e);
-    DOM.showPopup('Изменить тикет', response, e);
-  }
-
-  async expand(e) {
-    const description = e.target.querySelector('.ticket__description');
-    if (description) {
-      description.remove();
-      return;
-    }
-    const response = await this.requestTicket(e);
-    DOM.showDescription(e, response);
-  }
-
-  async requestTicket(e) {
-    const ticket = e.target.closest('.ticket');
-    const id = ticket.querySelector('.ticket__check').getAttribute('id');
-    const response = await this.request.getTicket(id);
-    return response;
-  }
-
-  async sendTicket(e) {
-    const popup = e.target.closest('.popup');
-    const form = popup.querySelector('.popup__form');
-    const response = await this.request.postTicket('createTicket', null, form);
+  async checkName(e) {
+    e.preventDefault();
+    const form = e.target.closest('.popup__form');
+    const name = new FormData(form).get('name');
+    const response = await this.request.checkName(name);
+    let users;
     if (response.ok) {
-      DOM.showPopup();
-      this.start();
+      users = await response.json();
+      console.log(users);
+      DOM.showUsers(users, name);
+      return;
     }
-  }
-
-  async deleteTicket(e) {
-    const id = e.target.dataset.ticketId;
-    const response = await this.request.postTicket('deleteTicket', id);
-    if (response.ok) {
-      DOM.showPopup();
-      this.start();
-    }
-  }
-
-  async changeTicket(e) {
-    const id = e.target.dataset.ticketId;
-    const popup = e.target.closest('.popup');
-    const form = popup.querySelector('.popup__form');
-    const response = await this.request.postTicket('changeTicket', id, form);
-    if (response.ok) {
-      DOM.showPopup();
-      this.start();
-    }
-  }
-
-  checkTicket(e) {
-    const id = e.target.getAttribute('id');
-    this.request.postTicket('changeTicket', id);
+    const error = await response.text();
+    console.log(error);
+    // TODO дописать предупреждение DOM.showError(error);
   }
 }

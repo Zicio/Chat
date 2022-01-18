@@ -3,23 +3,23 @@ export default class DOM {
     this.element = element;
   }
 
-  static showTickets(tickets) {
-    const ticketBox = document.querySelector('.tickets');
-    const ticketsList = ticketBox.getElementsByClassName('ticket');
-    if (ticketsList.length) {
-      for (const ticket of [...ticketsList]) {
-        ticket.remove();
-      }
+  static showUsers(users) {
+    const chatList = document.querySelector('.chat__list');
+    for (const user of users) {
+      const newUser = `<li class="user" id="${user.id}"><span class="user__name">${user.name}</span></li>`;
+      chatList.insertAdjacentHTML('beforeend', newUser);
+      // if (ticket.status) {
+      //   const lastTicketCheck = document.getElementById(ticket.id);
+      //   lastTicketCheck.setAttribute('checked', true);
+      // }
     }
-    for (const ticket of tickets) {
-      const newTicket = `<div class="ticket"><input type="checkbox" class="ticket__check" id="${ticket.id}"><span class="ticket__name">${ticket.name}</span><span class="ticket__date">${ticket.created}</span><input type="button" class="ticket__change ticket__button" value="&#9998"><input type="button" class="ticket__delete ticket__button" value="X">`;
-      ticketBox.insertAdjacentHTML('beforeend', newTicket);
-      if (ticket.status) {
-        const lastTicketCheck = document.getElementById(ticket.id);
-        lastTicketCheck.setAttribute('checked', true);
-      }
-    }
+    const you = chatList.lastChild;
+    you.textContent = 'YOU';
+    const popup = document.querySelector('.chat__popup');
+    popup.classList.add('unactive');
   }
+  
+
 
   static showPopup(type, response, e) {
     const popUp = document.querySelector('.popup');
