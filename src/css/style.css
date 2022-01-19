@@ -12,6 +12,7 @@ html {
 }
 
 .chat__popup {
+    display: none;
     position: fixed;
     background-color: white;
     z-index: 1;
@@ -39,6 +40,23 @@ html {
     width: 100%;
     font-size: 20px;
     font-family: inherit;
+}
+
+.form__field:invalid {
+    border-color: #900;
+}
+
+.form__field:focus:invalid, .form__field:focus:valid  {
+    outline: none;
+  }
+
+.form__field:valid {
+    border-color: rgb(30, 197, 24);
+}
+
+.form__hint {
+    display: none;
+    color: red;
 }
 
 .form__submit {
@@ -69,7 +87,7 @@ html {
     background-color: white;
 }
 
-.unactive {
-    display: none;
+.active {
+    display: block;
 }
 

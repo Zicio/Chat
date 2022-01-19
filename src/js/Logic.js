@@ -24,16 +24,29 @@ export default class Logic {
     e.preventDefault();
     const form = e.target.closest('.popup__form');
     const name = new FormData(form).get('name');
+    const field = form.querySelector('.form__field');
+    if (!field.validity.valid) {
+      Logic.createHint(field);
+      return;
+    }
     const response = await this.request.checkName(name);
     let users;
     if (response.ok) {
       users = await response.json();
       console.log(users);
       DOM.showUsers(users, name);
+      DOM.showHint(field, null);
       return;
     }
     const error = await response.text();
     console.log(error);
-    // TODO дописать предупреждение DOM.showError(error);
+    DOM.showHint(field, error);
+  }
+
+  static createHint(field) {
+    if (field.validity.valueMissing) {
+      const textOfHint = 'Напишите псевдоним!';
+      DOM.showHint(field, textOfHint);
+    }
   }
 }

@@ -7,8 +7,6 @@ export default class Request {
     const url = `${this.url}${name}`;
     const response = await fetch(url);
     return response;
-    // this.url.searchParams.delete('id');
-    // return ticket[0];
   }
 
   async postTicket(method, id, form) {

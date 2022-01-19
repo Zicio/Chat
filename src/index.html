@@ -8,10 +8,11 @@
 </head>
 <body>
   <main class="chat">
-    <div class="chat__popup">
+    <div class="chat__popup active">
       <form class="popup__form">
         <label class="form__label" for="name">Выберите псевдоним</label>
-        <input class="form__field" type="text" name="name">
+        <input class="form__field" id="name" type="text" name="name" required>
+        <div class="form__hint"></div>
         <button type="submit" class="form__submit">Продолжить</button>
       </form>
     </div>
