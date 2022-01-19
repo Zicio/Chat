@@ -7,7 +7,6 @@ html {
 }
 
 .chat {
-    min-width: 300px;
     padding: 20px;
 }
 
@@ -33,7 +32,7 @@ html {
     display: block;
 }
 
-.form__field {
+.form__field, .chat__field {
     border: 1px solid black;
     box-sizing: border-box;
     margin-top: 30px;
@@ -47,7 +46,7 @@ html {
 }
 
 .form__field:focus:invalid, .form__field:focus:valid  {
-    outline: none;
+    border-color: black;
   }
 
 .form__field:valid {
@@ -79,12 +78,37 @@ html {
     background-color:green;
 }
 
+.chat__container {
+    display: none;
+    min-width: 300px;
+
+}
+
 .chat__list {
-    min-width: 1000px;
+    min-width: 300px;
+    width: 30%;
     border: 1px solid black;
     border-radius: 15px;
     list-style-type: none;
     background-color: white;
+    position: relative;
+    padding: 20px;
+}
+
+.chat__window {
+    position: absolute;
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: white;
+    min-width: 50%;
+    top: 5%;
+    left: 300px;
+    padding: 20px;
+}
+
+.chat__field {
+    border-radius: 15px;
+    padding: 10px;
 }
 
 .active {

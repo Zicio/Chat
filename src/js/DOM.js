@@ -11,8 +11,11 @@ export default class DOM {
     }
     const you = chatList.lastChild;
     you.textContent = 'YOU';
+    you.style.color = 'orange';
     const popup = document.querySelector('.chat__popup');
     popup.classList.remove('active');
+    const chatContainer = document.querySelector('.chat__container');
+    chatContainer.classList.add('active');
   }
 
   static showHint(field, text) {
@@ -26,6 +29,7 @@ export default class DOM {
     if (!hint.classList.contains('active')) {
       hint.textContent = text;
       hint.classList.add('active');
+
     }
     // При изменении текста ошибки
     if (hint.textContent !== text) {

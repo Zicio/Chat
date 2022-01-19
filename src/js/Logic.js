@@ -6,14 +6,15 @@ export default class Logic {
     this.element = element;
     this.request = new Request();
 
-    this.listener();
+    this.clickListener();
+    this.keyListener();
   }
 
-  listener() {
-    this.element.addEventListener('click', (e) => this.eventHandler(e));
+  clickListener() {
+    this.element.addEventListener('click', (e) => this.clickHandler(e));
   }
 
-  eventHandler(e) {
+  clickHandler(e) {
     // Кнопка "Продолжить"
     if (e.target.classList.contains('form__submit')) {
       this.checkName(e);
@@ -47,6 +48,21 @@ export default class Logic {
     if (field.validity.valueMissing) {
       const textOfHint = 'Напишите псевдоним!';
       DOM.showHint(field, textOfHint);
+    }
+  }
+
+  keyListener() {
+    this.element.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.keyHandler(e);
+    });
+  }
+
+  keyHandler(e) {
+    // Отправить сообщение
+    const field = document.querySelector('.chat__field');
+    if (document.activeElement === field) {
+      this.request.sendMessage();
     }
   }
 }
