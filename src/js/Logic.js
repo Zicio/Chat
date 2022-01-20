@@ -37,7 +37,7 @@ export default class Logic {
       console.log(users);
       DOM.showUsers(users, name);
       DOM.showHint(field, null);
-      Request.connectWS();
+      this.request.connectWS();
       return;
     }
     const error = await response.text();
