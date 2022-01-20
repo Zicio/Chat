@@ -17,7 +17,7 @@ export default class Request {
 
   connectWS() {
     const { url } = this;
-    const host = url.href.replace(/^http/, 'wss');
+    const host = url.href.replace(/^https/, 'wss');
     const ws = new WebSocket(host);
     ws.onopen = console.log('ONLINE');
     ws.onmessage = (response) => {
