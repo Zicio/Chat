@@ -1,3 +1,5 @@
+import DOM from './DOM';
+
 export default class Request {
   constructor() {
     this.url = new URL('https://zicio-chat.herokuapp.com/users/');
@@ -12,5 +14,15 @@ export default class Request {
 
   async sendMessage() {
     console.log(`${this.url}`);
+  }
+
+  static connectWS() {
+    const ws = new WebSocket('ws://zicio-chat.herokuapp.com/');
+    ws.onopen = console.log('ONLINE');
+    ws.onmessage = (response) => {
+      if (response.name) {
+        DOM.showUsers(response);
+      }
+    };
   }
 }
