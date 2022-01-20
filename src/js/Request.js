@@ -2,7 +2,7 @@ import DOM from './DOM';
 
 export default class Request {
   constructor() {
-    this.url = new URL('http://zicio-chat.herokuapp.com/');
+    this.url = new URL('https://zicio-chat.herokuapp.com/');
   }
 
   async checkName(name) {
@@ -17,7 +17,7 @@ export default class Request {
 
   connectWS() {
     const { url } = this;
-    const host = url.href.replace(/^http/, 'ws');
+    const host = url.href.replace(/^http/, 'wss');
     const ws = new WebSocket(host);
     ws.onopen = console.log('ONLINE');
     ws.onmessage = (response) => {
