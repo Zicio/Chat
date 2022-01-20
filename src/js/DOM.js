@@ -29,7 +29,6 @@ export default class DOM {
     if (!hint.classList.contains('active')) {
       hint.textContent = text;
       hint.classList.add('active');
-
     }
     // При изменении текста ошибки
     if (hint.textContent !== text) {
