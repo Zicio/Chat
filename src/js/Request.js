@@ -21,9 +21,7 @@ export default class Request {
     const ws = new WebSocket(host);
     ws.onopen = console.log('ONLINE');
     ws.onmessage = (response) => {
-      if (response.name) {
-        DOM.showUsers(response);
-      }
+      DOM.showUsers(JSON.parse(response.data));
     };
   }
 }

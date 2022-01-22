@@ -33,9 +33,9 @@ export default class Logic {
     const response = await this.request.checkName(name);
     let users;
     if (response.ok) {
-      users = await response.json();
-      console.log(users);
-      DOM.showUsers(users, name);
+      // users = await response.json();
+      // console.log(users);
+      // DOM.showUsers(users, name);
       DOM.showHint(field, null);
       this.request.connectWS();
       return;
