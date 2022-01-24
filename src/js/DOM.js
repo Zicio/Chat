@@ -21,6 +21,7 @@ export default class DOM {
       yourId = chatList.lastChild.id;
     }
     const yourTicket = document.getElementById(yourId);
+    yourTicket.lastChild.dataset.myName = yourTicket.lastChild.textContent;
     yourTicket.lastChild.textContent = 'YOU';
     yourTicket.lastChild.style.color = 'orange';
     const popup = document.querySelector('.chat__popup');

@@ -23,5 +23,6 @@ export default class Request {
     ws.onmessage = (response) => {
       DOM.showUsers(JSON.parse(response.data));
     };
+    ws.onclose = console.log('OFFLINE');
   }
 }
