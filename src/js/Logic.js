@@ -31,7 +31,7 @@ export default class Logic {
       return;
     }
     const response = await this.request.checkName(name);
-    let users;
+    // let users;
     if (response.ok) {
       // users = await response.json();
       // console.log(users);

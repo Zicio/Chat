@@ -5,6 +5,11 @@ export default class DOM {
 
   static showUsers(users) {
     const chatList = document.querySelector('.chat__list');
+    if (chatList.firstChild) {
+      while (chatList.firstChild) {
+        chatList.removeChild(chatList.firstChild);
+      }
+    }
     for (const user of users) {
       const newUser = `<li class="user" id="${user.id}"><span class="user__name">${user.name}</span></li>`;
       chatList.insertAdjacentHTML('beforeend', newUser);
