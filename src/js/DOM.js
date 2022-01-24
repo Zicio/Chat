@@ -5,7 +5,10 @@ export default class DOM {
 
   static showUsers(users) {
     const chatList = document.querySelector('.chat__list');
-    if (chatList.firstChild) {
+    let yourId = null;
+    if (chatList.childNodes.length > 1) {
+      const usersTickets = chatList.getElementsByClassName('user');
+      yourId = ([...usersTickets].find((el) => el.firstChild.textContent === 'YOU')).id;
       while (chatList.firstChild) {
         chatList.removeChild(chatList.firstChild);
       }
@@ -14,9 +17,12 @@ export default class DOM {
       const newUser = `<li class="user" id="${user.id}"><span class="user__name">${user.name}</span></li>`;
       chatList.insertAdjacentHTML('beforeend', newUser);
     }
-    const you = chatList.lastChild;
-    you.textContent = 'YOU';
-    you.style.color = 'orange';
+    if (!yourId) {
+      yourId = chatList.lastChild.id;
+    }
+    const yourTicket = document.getElementById(yourId);
+    yourTicket.lastChild.textContent = 'YOU';
+    yourTicket.lastChild.style.color = 'orange';
     const popup = document.querySelector('.chat__popup');
     popup.classList.remove('active');
     const chatContainer = document.querySelector('.chat__container');
