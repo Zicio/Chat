@@ -33,6 +33,7 @@ export default class Logic {
     const response = await this.request.checkName(name);
     if (response.ok) {
       DOM.showHint(field, null);
+      this.request.getWS();
       this.request.connectWS();
       return;
     }
@@ -51,15 +52,15 @@ export default class Logic {
   keyListener() {
     this.element.addEventListener('submit', (e) => {
       e.preventDefault();
-      this.keyHandler(e);
+      Logic.keyHandler(e);
     });
   }
 
-  keyHandler(e) {
+  static keyHandler(e) {
     // Отправить сообщение
     const field = document.querySelector('.chat__field');
     if (document.activeElement === field) {
-      this.request.sendMessage();
+      Request.sendMessage(field.value);
     }
   }
 }
