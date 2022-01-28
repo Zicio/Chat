@@ -2,7 +2,7 @@ import DOM from './DOM';
 
 export default class Request {
   constructor() {
-    this.url = new URL('https://zicio-chat.herokuapp.com/');
+    this.url = new URL('http://localhost:7000/');
     this.ws = null;
   }
 
@@ -14,7 +14,7 @@ export default class Request {
 
   getWS() {
     const { url } = this;
-    const host = url.href.replace(/^https/, 'wss');
+    const host = url.href.replace(/^http/, 'ws');
     const ws = new WebSocket(host);
     ws.onopen = console.log('ONLINE');
     this.ws = ws;
@@ -29,7 +29,7 @@ export default class Request {
   // }
 
   connectWS() {
-    this.ws.send('connect');
+    this.ws.onopen = () => this.ws.send(JSON.stringify(''));
     this.ws.onmessage = (response) => {
       DOM.showUsers(JSON.parse(response.data));
     };
