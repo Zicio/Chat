@@ -32,10 +32,11 @@ export default class Request {
     this.ws.onopen = () => this.ws.send(JSON.stringify(msg));
     if (!msg) {
       this.ws.onmessage = (response) => DOM.showUsers(JSON.parse(response.data));
+    } else {
+      this.ws.onmessage = (response) => {
+        console.log(response.data);
+      };
     }
-    // else {
-    // TODO обработчик показа сообщений
-    // }
     this.ws.onclose = console.log('OFFLINE');
   }
 }

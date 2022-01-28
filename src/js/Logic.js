@@ -60,7 +60,7 @@ export default class Logic {
     // Отправить сообщение
     const field = document.querySelector('.chat__field');
     if (document.activeElement === field) {
-      this.request.sendMessage(field.value);
+      this.request.connectWS(field.value);
     }
   }
 }
