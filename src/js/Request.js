@@ -2,7 +2,7 @@ import DOM from './DOM';
 
 export default class Request {
   constructor() {
-    this.url = new URL('http://localhost:7000/');
+    this.url = new URL('https://zicio-chat.herokuapp.com/'); // 'http://localhost:7000/'
     this.ws = null;
   }
 
@@ -14,25 +14,28 @@ export default class Request {
 
   getWS() {
     const { url } = this;
-    const host = url.href.replace(/^http/, 'ws');
+    const host = url.href.replace(/^https/, 'wss'); // ^http/, 'ws'
     const ws = new WebSocket(host);
     ws.onopen = console.log('ONLINE');
     this.ws = ws;
   }
 
-  // static sendMessage(ws, message) {
-  //   ws.onopen = () => ws.send(message);
-  //   ws.onmessage = (response) => {
+  // sendMessage(message) {
+  //   this.ws.onopen = () => this.ws.send(JSON.stringify(message));
+  //   this.ws.onmessage = (response) => {
   //     console.log(response.data);
   //   };
-  //   ws.onclose = console.log('OFFLINE');
+  //   this.ws.onclose = console.log('OFFLINE');
   // }
 
-  connectWS() {
-    this.ws.onopen = () => this.ws.send(JSON.stringify(''));
-    this.ws.onmessage = (response) => {
-      DOM.showUsers(JSON.parse(response.data));
-    };
+  connectWS(msg) {
+    this.ws.onopen = () => this.ws.send(JSON.stringify(msg));
+    if (!msg) {
+      this.ws.onmessage = (response) => DOM.showUsers(JSON.parse(response.data));
+    }
+    // else {
+    // TODO обработчик показа сообщений
+    // }
     this.ws.onclose = console.log('OFFLINE');
   }
 }
