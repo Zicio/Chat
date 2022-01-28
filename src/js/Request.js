@@ -29,6 +29,7 @@ export default class Request {
   // }
 
   connectWS() {
+    this.ws.send('connect');
     this.ws.onmessage = (response) => {
       DOM.showUsers(JSON.parse(response.data));
     };
