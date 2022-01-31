@@ -34,7 +34,7 @@ export default class Logic {
     if (response.ok) {
       DOM.showHint(field, null);
       this.request.getWS();
-      this.request.connectWS('');
+      this.request.firstSendWS('');
       return;
     }
     const error = await response.text();
@@ -52,15 +52,18 @@ export default class Logic {
   keyListener() {
     this.element.addEventListener('submit', (e) => {
       e.preventDefault();
-      this.keyHandler(e);
+      this.keyHandler();
     });
   }
 
   keyHandler() {
     // Отправить сообщение
     const field = document.querySelector('.chat__field');
+    const obj = {};
+    obj.name = document.querySelector('.you').dataset.myName;
+    obj.message = field.value;
     if (document.activeElement === field) {
-      this.request.connectWS(field.value);
+      this.request.sendWS(obj);
     }
   }
 }

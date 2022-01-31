@@ -16,27 +16,25 @@ export default class Request {
     const { url } = this;
     const host = url.href.replace(/^https/, 'wss'); // ^http/, 'ws'
     const ws = new WebSocket(host);
-    ws.onopen = console.log('ONLINE');
     this.ws = ws;
+    this.ws.onopen = console.log('ONLINE');
+    this.ws.onmessage = (response) => Request.responseHandler(JSON.parse(response.data));
+    this.onclose = console.log('OFFLINE');
   }
 
-  // sendMessage(message) {
-  //   this.ws.onopen = () => this.ws.send(JSON.stringify(message));
-  //   this.ws.onmessage = (response) => {
-  //     console.log(response.data);
-  //   };
-  //   this.ws.onclose = console.log('OFFLINE');
-  // }
-
-  connectWS(msg) {
+  firstSendWS(msg) {
     this.ws.onopen = () => this.ws.send(JSON.stringify(msg));
-    if (!msg) {
-      this.ws.onmessage = (response) => DOM.showUsers(JSON.parse(response.data));
+  }
+
+  sendWS(msg) {
+    this.ws.send(JSON.stringify(msg));
+  }
+
+  static responseHandler(response) {
+    if (response.length) {
+      DOM.showUsers(response);
     } else {
-      this.ws.onmessage = (response) => {
-        console.log(response.data);
-      };
+      console.log(response);
     }
-    this.ws.onclose = console.log('OFFLINE');
   }
 }
