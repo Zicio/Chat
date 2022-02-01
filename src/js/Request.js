@@ -2,7 +2,7 @@ import DOM from './DOM';
 
 export default class Request {
   constructor() {
-    this.url = new URL('http://localhost:7000/'); // 'http://localhost:7000/'
+    this.url = new URL('https://zicio-chat.herokuapp.com/'); // 'http://localhost:7000/'
     this.ws = null;
   }
 
@@ -14,7 +14,7 @@ export default class Request {
 
   getWS() {
     const { url } = this;
-    const host = url.href.replace(/^http/, 'ws'); // /^http/, 'ws'
+    const host = url.href.replace(/^https/, 'wss'); // /^http/, 'ws'
     const ws = new WebSocket(host);
     this.ws = ws;
     this.ws.onopen = console.log('ONLINE');
