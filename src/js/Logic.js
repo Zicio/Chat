@@ -64,6 +64,7 @@ export default class Logic {
     obj.text = field.value;
     if (document.activeElement === field) {
       this.request.sendWS(obj);
+      field.value = '';
     }
   }
 }

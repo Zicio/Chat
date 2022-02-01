@@ -49,7 +49,7 @@ export default class DOM {
     }
   }
 
-  static showMessages(messages, you) {
+  static showMessages(messages) {
     const chatTape = document.querySelector('.chat__tape');
     for (const msg of messages) {
       const newMessage = document.createElement('div');
@@ -58,9 +58,10 @@ export default class DOM {
       const messageInfo = document.createElement('span');
       messageInfo.classList.add('message__info');
       messageInfo.textContent = msg.name;
-      if (you) {
+      const you = document.querySelector('.you');
+      if (msg.name === you.dataset.myName) {
         newMessage.classList.add('your-message');
-        messageInfo.textContent = you;
+        messageInfo.textContent = 'You';
       }
       const messageText = document.createElement('span');
       messageText.classList.add('message__text');
