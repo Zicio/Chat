@@ -48,4 +48,25 @@ export default class DOM {
       hint.textContent = text;
     }
   }
+
+  static showMessages(messages, you) {
+    const chatTape = document.querySelector('.chat__tape');
+    for (const msg of messages) {
+      const newMessage = document.createElement('div');
+      newMessage.classList.add('chat__message');
+      chatTape.appendChild(newMessage);
+      const messageInfo = document.createElement('span');
+      messageInfo.classList.add('message__info');
+      messageInfo.textContent = msg.name;
+      if (you) {
+        newMessage.classList.add('your-message');
+        messageInfo.textContent = you;
+      }
+      const messageText = document.createElement('span');
+      messageText.classList.add('message__text');
+      messageText.textContent = msg.text;
+      newMessage.appendChild(messageInfo);
+      newMessage.appendChild(messageText);
+    }
+  }
 }

@@ -61,7 +61,7 @@ export default class Logic {
     const field = document.querySelector('.chat__field');
     const obj = {};
     obj.name = document.querySelector('.you').dataset.myName;
-    obj.message = field.value;
+    obj.text = field.value;
     if (document.activeElement === field) {
       this.request.sendWS(obj);
     }
