@@ -38,6 +38,7 @@ export default class Request {
     }
     if (Object.prototype.hasOwnProperty.call(response, 'id')) {
       DOM.deleteUserOffline(response);
+      return;
     }
     DOM.showMessages(response, 'you');
   }
