@@ -110,10 +110,15 @@ html {
     text-align: end;
 }
 
+.your-message > .message__info {
+    color: orange;
+}
+
 .message__info {
     font-size: small;
     display: block;
     color: blue;
+    font-weight: bold;
 }
 
 .message__text {
