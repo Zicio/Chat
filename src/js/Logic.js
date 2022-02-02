@@ -60,11 +60,38 @@ export default class Logic {
     // Отправить сообщение
     const field = document.querySelector('.chat__field');
     const obj = {};
-    obj.name = document.querySelector('.you').dataset.myName;
+    const date = Logic.getDate();
+    obj.name = `${document.querySelector('.you').dataset.myName}, ${date.hour}:${date.minute} ${date.day}.${date.month}.${date.year}`;
     obj.text = field.value;
     if (document.activeElement === field) {
       this.request.sendWS(obj);
       field.value = '';
     }
+  }
+
+  static getDate() {
+    const date = new Date();
+    const month = Logic.format(date.getMonth() + 1);
+    const day = Logic.format(date.getDate());
+    let hour = Logic.format(date.getHours() + 4);
+    if (hour === 24) {
+      hour = 0;
+    }
+    const minute = Logic.format(date.getMinutes());
+    const year = +date.getFullYear().toString().slice(2);
+    return {
+      month,
+      day,
+      hour,
+      minute,
+      year,
+    };
+  }
+
+  static format(date) {
+    if (date < 10) {
+      date = `0${date}`;
+    }
+    return date;
   }
 }

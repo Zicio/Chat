@@ -59,9 +59,9 @@ export default class DOM {
       messageInfo.classList.add('message__info');
       messageInfo.textContent = msg.name;
       const you = document.querySelector('.you');
-      if (msg.name === you.dataset.myName) {
+      if (msg.name.includes(you.dataset.myName, 0)) {
         newMessage.classList.add('your-message');
-        messageInfo.textContent = 'You';
+        messageInfo.textContent = messageInfo.textContent.replace(you.dataset.myName, 'You');
       }
       const messageText = document.createElement('span');
       messageText.classList.add('message__text');
