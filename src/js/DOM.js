@@ -70,4 +70,9 @@ export default class DOM {
       newMessage.appendChild(messageText);
     }
   }
+
+  static deleteUserOffline(user) {
+    const userEl = document.getElementById(user.id);
+    userEl.remove();
+  }
 }
