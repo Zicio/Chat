@@ -6,7 +6,7 @@ export default class DOM {
   static showUsers(users) {
     const chatList = document.querySelector('.chat__list');
     let yourId = null;
-    if (chatList.childNodes.length > 1) {
+    if (chatList.childNodes.length) {
       const usersTickets = chatList.getElementsByClassName('user');
       yourId = ([...usersTickets].find((el) => el.firstChild.textContent === 'YOU')).id;
       while (chatList.firstChild) {
