@@ -33,7 +33,9 @@ export default class Request {
   static responseHandler(response) {
     if (Object.prototype.hasOwnProperty.call(response, 'users')) {
       DOM.showUsers(response.users);
-      DOM.showMessages(response.messages);
+      if (Object.prototype.hasOwnProperty.call(response, 'messages')) {
+        DOM.showMessages(response.messages);
+      }
       return;
     }
     if (Object.prototype.hasOwnProperty.call(response, 'id')) {
