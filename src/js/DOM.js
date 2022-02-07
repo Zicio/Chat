@@ -50,6 +50,7 @@ export default class DOM {
 
   static showMessages(messages) {
     const chatTape = document.querySelector('.chat__tape');
+    const messagesTickets = document.getElementsByClassName('chat__message');
     for (const msg of messages) {
       const newMessage = document.createElement('div');
       newMessage.classList.add('chat__message');
