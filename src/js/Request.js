@@ -36,12 +36,12 @@ export default class Request {
       DOM.showMessages(response.messages);
       return;
     }
-    if (response[0].id) {
-      DOM.showUsers(response);
-      return;
-    }
     if (response.id) {
       DOM.deleteUserOffline(response);
+      return;
+    }
+    if (response[0].id) {
+      DOM.showUsers(response);
       return;
     }
     DOM.showMessages(response);
