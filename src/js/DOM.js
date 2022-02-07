@@ -6,16 +6,15 @@ export default class DOM {
   static showUsers(users) {
     const chatList = document.querySelector('.chat__list');
     let yourId = null;
+    const usersTickets = chatList.getElementsByClassName('user');
     if (chatList.childNodes.length > 1) {
-      const usersTickets = chatList.getElementsByClassName('user');
       yourId = ([...usersTickets].find((el) => el.firstChild.textContent === 'YOU')).id;
-      while (chatList.firstChild) {
-        chatList.removeChild(chatList.firstChild);
-      }
     }
     for (const user of users) {
-      const newUser = `<li class="user" id="${user.id}"><span class="user__name">${user.name}</span></li>`;
-      chatList.insertAdjacentHTML('beforeend', newUser);
+      if (!usersTickets.length || [...usersTickets].find((el) => el.id !== user.id)) {
+        const newUser = `<li class="user" id="${user.id}"><span class="user__name">${user.name}</span></li>`;
+        chatList.insertAdjacentHTML('beforeend', newUser);
+      }
     }
     if (!yourId) {
       yourId = chatList.lastChild.id;
