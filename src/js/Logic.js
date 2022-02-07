@@ -73,7 +73,7 @@ export default class Logic {
     const date = new Date();
     const month = Logic.format(date.getMonth() + 1);
     const day = Logic.format(date.getDate());
-    let hour = Logic.format(date.getHours() + 4);
+    let hour = Logic.format(date.getHours());
     if (hour === 24) {
       hour = 0;
     }
