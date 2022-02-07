@@ -40,10 +40,10 @@ export default class Request {
       DOM.showUsers(response);
       return;
     }
-    // if (Object.prototype.hasOwnProperty.call(response, 'id')) {
-    //   DOM.deleteUserOffline(response);
-    //   return;
-    // }
+    if (response.id) {
+      DOM.deleteUserOffline(response);
+      return;
+    }
     DOM.showMessages(response);
   }
 }
