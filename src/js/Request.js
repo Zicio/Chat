@@ -36,10 +36,14 @@ export default class Request {
       DOM.showMessages(response.messages);
       return;
     }
-    if (Object.prototype.hasOwnProperty.call(response, 'id')) {
-      DOM.deleteUserOffline(response);
+    if (response[0].id) {
+      DOM.showUsers(response);
       return;
     }
-    DOM.showMessages(response, 'you');
+    // if (Object.prototype.hasOwnProperty.call(response, 'id')) {
+    //   DOM.deleteUserOffline(response);
+    //   return;
+    // }
+    DOM.showMessages(response);
   }
 }
