@@ -8,7 +8,7 @@ export default class DOM {
     let yourId = null;
     const usersTickets = chatList.getElementsByClassName('user');
     if (chatList.childNodes.length > 1) {
-      yourId = ([...usersTickets].find((el) => el.firstChild.textContent === 'YOU')).id;
+      yourId = ([...usersTickets].find((el) => el.textContent === 'YOU')).id;
     }
     for (const user of users) {
       if (!usersTickets.length || [...usersTickets].find((el) => el.id !== user.id)) {
@@ -18,12 +18,12 @@ export default class DOM {
     }
     if (!yourId) {
       yourId = chatList.lastChild.id;
+      const yourTicket = document.getElementById(yourId);
+      yourTicket.lastChild.dataset.myName = yourTicket.lastChild.textContent;
+      yourTicket.lastChild.classList.add('you');
+      yourTicket.lastChild.textContent = 'YOU';
+      yourTicket.lastChild.style.color = 'orange';
     }
-    const yourTicket = document.getElementById(yourId);
-    yourTicket.lastChild.dataset.myName = yourTicket.lastChild.textContent;
-    yourTicket.lastChild.classList.add('you');
-    yourTicket.lastChild.textContent = 'YOU';
-    yourTicket.lastChild.style.color = 'orange';
     const popup = document.querySelector('.chat__popup');
     popup.classList.remove('active');
     const chatContainer = document.querySelector('.chat__container');

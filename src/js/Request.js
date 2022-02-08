@@ -19,7 +19,6 @@ export default class Request {
     this.ws = ws;
     this.ws.onopen = console.log('ONLINE');
     this.ws.onmessage = (response) => Request.responseHandler(JSON.parse(response.data));
-    // this.ws.onclose = console.log('OFFLINE');
   }
 
   firstSendWS(msg) {
